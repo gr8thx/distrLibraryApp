@@ -5,4 +5,5 @@ Python Flaskの勉強のために作成したWebアプリです。
 >フロントエンド: html css bootstrap
 
 >バックエンド: Python Flask
-         SQLite GoogleBooksAPI
+
+>その他: SQLite GoogleBooksAPI
