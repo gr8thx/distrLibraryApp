@@ -1,0 +1,42 @@
+{% extends "base_compact.html" %}
+{% block content %}
+
+    <h2>Register Account</h2>
+    <br>
+    <!-- アイコン -->
+    <span class="material-icons icon-large">person_add</span>
+
+    <!-- アカウント新規登録フォーム -->
+    <!-- 自分自身のhtmlを再度読み込む -->
+    <form action="/lib_account_register/" method="POST">
+        <table>
+            <tr>
+                <td>userID &emsp;</td>
+                <td><input name="request_new_userID" placeholder="user0000xx"></input></td>
+            </tr>
+            <tr>
+                <td>name &emsp;</td>
+                <td><input name="request_new_name" placeholder="山田太郎"></input></td>
+            </tr>
+            <tr>
+                <td>password &emsp;</td>
+                <td><input type="password" name="request_new_password"></input></td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+        <br>
+        {% if is_newed %}
+            <p class="text-srccess">Successed Register Account</p>
+        {% elif  is_error == 2 %}
+            <p class="text-danger">userID is Duplicated</p>
+        {% elif  is_error == 3 %}
+            <p class="text-danger">Empty userID or Password</p>
+        {% endif %}
+    </form>
+
+    <br>
+    <a href="/librarian/">back</a>
+
+
+{% endblock %}

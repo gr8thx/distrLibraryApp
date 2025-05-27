@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>検索結果</h3>
+    <p>検索文字列:{{ book_title }}</p>
+
+
+    {% if books == [] %}
+        <p>該当はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>蔵書ID</th>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>版数</th>
+                    <th>場所</th>
+                    <th>分類</th>
+                    <th>貸出状態</th>
+                    <th>詳細</th>
+                    {% if current_user.role == "user" %}
+                        <th>貸出</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                {% for book in books %}
+                    
+                    <tr>
+                        <td>{{book.collectionID}}</td>
+                        <td>{{book.ISBN_uBN}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.revision}}</td>
+                        <td>{{book.location}}</td>
+                        <td>{{book.ndc_2nd}}</td>
+                        <td>{{book.status}}</td>
+                        <td><a href="/details/{{book.ISBN_uBN}}"><button  class="btn btn-outline-dark btn-sm">詳細</button></a></td>
+                        {% if current_user.role == "user" %}
+                        <td>
+                            <form action="/borrow/" method="POST">
+                                <button type="submit" name="request_lend_collectionID" value="{{ book.collectionID }}" class="btn btn-outline-primary btn-sm">
+                                    貸出
+                                </button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    <br>
+    <a href="/">戻る</a>
+
+{% endblock %}

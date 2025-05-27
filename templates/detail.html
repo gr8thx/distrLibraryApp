@@ -1,0 +1,80 @@
+{% extends "base_detail.html" %}
+{% block content %}
+
+    <h3>検索結果[詳細]</h3>
+
+
+    {% if book == [] %}
+        <p>該当はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+                <tr>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>版数</th>
+                </tr>
+                <tr>
+                    <td>{{book[0].ISBN_uBN}}</td>
+                    <td>{{book[0].title}}</td>
+                    <td>{{book[0].author}}</td>
+                    <td>{{book[0].revision}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="container">
+            
+            <div class="left-img">
+                <img src="/static/images/{{book[0].book_cover}}" alt="書影"
+                    title="{{book[0].book_cover}}" width="141" height="225">
+            </div>
+            <div class="right-text">
+
+                <h6>【内容説明】</h6>
+                <p>{{book[0].explanation}}</p>
+
+
+                <br>
+
+                <h6>【蔵書の状況】</h6>
+                <div class="lending_table">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>蔵書ID</th>
+                            <th>場所</th>
+                            <th>分類</th>
+                            <th>貸出状況</th>
+                        </tr>
+                        {% for book_status in books_status %}
+                            <tr>
+                                <td>{{book_status.collectionID}}</td>
+                                <td>{{book_status.location}}</td>
+                                <td>{{book_status.ndc_2nd}}</td>
+                                <td>{{book_status.status}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h6>【レビュー・クチコミ】</h6>
+        <br>
+        {% if books_review == [] %}
+        レビューはありません
+        {% else %}
+            {% for book_review in books_review %}
+                {{book_review.userID}}&emsp;{{book_review.review_title}}
+                <br>
+                {{book_review.review_detail}}
+                <br><br>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+    <br>
+    <a href="/">戻る</a>
+
+{% endblock %}

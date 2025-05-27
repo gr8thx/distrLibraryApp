@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>事前予約キャンセル</h3>
+
+    ユーザーID：{{current_user.id}}
+    <br>
+    蔵書ID：{{collectionID}}
+    <br>
+    {% if is_done %}
+        蔵書IDの事前予約をすべてキャンセルしました
+    {% endif %}
+    
+    <br>
+    <a href="/user/">戻る</a>
+
+{% endblock %}

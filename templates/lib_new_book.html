@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>新規図書の登録</h3>
+
+    <form action="/lib_new_result/" method="POST" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>ISBN/uBN &emsp;</td>
+                <td><input name="request_ISBN_uBN" required></input>
+                ※</td>
+            </tr>
+            <tr>
+                <td>書棚・分類 &emsp;</td>
+                <td><input name="request_classificationID" required></input>
+                ※</td>
+            </tr>
+            
+                <td>タイトル &emsp;</td>
+                <td><input name="request_title"></input></td>
+            </tr>
+            <tr>
+                <td>著者 &emsp;</td>
+                <td><input name="request_author"></input></td>
+            </tr>
+            <tr>
+                <td>版数 &emsp;</td>
+                <td><input name="request_revision"></input></td>
+            </tr>
+            <tr>
+                <td>内容説明 &emsp;</td>
+                <td><input name="request_explanation"></input></td>
+            </tr>
+            <tr>
+                <td>書影 &emsp;</td>
+                <td><input type="file" name="request_book_cover"></input></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-outline-primary btn-sm">新規登録</button>
+    </form>
+    
+
+{% endblock %}

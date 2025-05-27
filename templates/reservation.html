@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>事前予約・直近予約</h3>
+
+    蔵書ID：{{req_collectionID}}
+    {% if not req_collectionID %}
+        <p class="text-danger">蔵書IDが入力されていません</p>
+    {% else %}
+        <!-- 本を借りるフォーム -->
+        <form action="/reservation_confirm/{{req_collectionID}}/" method="POST">
+        事前予約開始日：
+        <input type="date" name="req_lending_schedule_date" placeholder="ex. 2025/04/01"></input>
+        <button type="submit" class="btn btn-outline-primary btn-sm">貸出</button>
+        </form>
+
+        <div class="calendar-container">
+            <div class="calendar">
+                {{ year }}年{{ month%12 }}月
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in month_days %}
+                            <tr>
+                                {% for day in week %}
+                                    {% if day == 0 %}
+                                        <td></td>
+                                    {% else %}
+                                        <td>{{ day }}<br>
+                                            {{cal_lent[0][day]}}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="calendar">
+                {% if month+1<=12 %}
+                    {{ year }}年{{(month+1)%12}}月
+                {% else %}
+                    {{ year+1 }}年{{(month+1)%12}}月
+                {% endif %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in next1_month_days %}
+                            <tr>
+                                {% for day in week %}
+                                    {% if day == 0 %}
+                                        <td></td>
+                                    {% else %}
+                                        <td>{{ day }}<br>
+                                            {{cal_lent[1][day]}}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="calendar">
+                {% if month+2<=12 %}
+                    {{ year }}年{{(month+2)%12}}月
+                {% else %}
+                    {{ year+1 }}年{{(month+2)%12}}月
+                {% endif %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in next2_month_days %}
+                            <tr>
+                                {% for day in week %}
+                                    {% if day == 0 %}
+                                        <td></td>
+                                    {% else %}
+                                        <td>{{ day }}<br>
+                                            {{cal_lent[2][day]}}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="calendar">
+                {% if month+3<=12 %}
+                    {{ year }}年{{(month+3)%12}}月
+                {% else %}
+                    {{ year+1 }}年{{(month+3)%12}}月
+                {% endif %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in next3_month_days %}
+                            <tr>
+                                {% for day in week %}
+                                    {% if day == 0 %}
+                                        <td></td>
+                                    {% else %}
+                                        <td>{{ day }}<br>
+                                            {{cal_lent[3][day]}}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+<br>
+<a href="/user/">戻る</a>
+{% endblock %}

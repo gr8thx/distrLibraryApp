@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>事前予約処理</h3>
+
+    {% if is_over == True %}
+        <p class="text-danger">事前予約数が5を超過しています。</p>
+    {% elif is_null == True %}
+        <p class="text-danger">事前予約処理が無効です。</p>
+    {% elif is_error == True %}
+        <p class="text-danger">事前予約日が不適切です。</p>
+    {% else %}
+        蔵書ID：{{collectionID}}
+        <br>
+        事前予約開始日：{{lending_schedule_date}}
+        <br>
+        返却予定日：{{return_schedule_date}}
+
+        <p>事前予約しました</p>
+
+        
+    {% endif %}
+
+    <a href="/user/">戻る</a>
+{% endblock %}

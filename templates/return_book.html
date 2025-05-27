@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>蔵書返却</h3>
+
+<p>返却しました<p>
+
+<h6>【返却遅延回数】</h6>
+<br>
+{{delay_time}}回です。（5回で貸出不可になります）
+
+<br>
+<a href="/user/{{userID}}">戻る</a>
+        
+
+{% endblock %}

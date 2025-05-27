@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>アカウント管理</h3>
+    
+    <!-- アカウント新規登録フォーム -->
+    <h6>【利用者アカウント新規登録】</h6>
+    <!-- 自分自身のhtmlを再度読み込む -->
+    <form action="/lib_management" method="POST">
+        利用者ID：
+        <input name="request_new_userID" placeholder="user0000xx"></input>
+        <br>
+        氏名：
+        <input name="request_new_name" placeholder="山田太郎"></input>
+        <br>
+        パスワード：
+        <input type="password" name="request_new_password"></input>
+        <button type="submit" class="btn btn-outline-primary btn-sm">新規登録</button>
+        {% if is_newed %}
+            アカウントを新規作成しました
+        {% elif  is_not_fill_passward == 1 %}
+            パスワードが空になっています
+        {% elif  is_not_fill_passward == 2 %}
+            入力されたユーザーIDは既に使われています
+        {% endif %}
+    </form>
+
+    <br>
+    <!-- アカウント削除フォーム -->
+    <h6>【利用者アカウント削除】</h6>
+    <!-- 自分自身のhtmlを再度読み込む -->
+    <form action="/lib_management" method="POST">
+        利用者ID：
+        <input type="text" name="request_delete_userID"  placeholder="user0000xx"></input>
+        <button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
+        {% if is_deleted %}
+            アカウントを削除しました
+        {% endif %}
+    </form>
+
+{% endblock %}

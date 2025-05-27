@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <p>新規図書の登録完了ページ</p>
+
+    {% if is_done == 1 %}
+        登録完了しました。
+    {% elif is_done == 2 %}
+        書棚・分類IDが入力されていません。
+    {% else %}
+        登録失敗しました？
+    {% endif %}
+    
+    
+    <a href="/lib_new_book">戻る</a>
+     
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>レビュー(クチコミ)の管理</h3>
+
+    {% if is_done == True %}
+        レビューを削除しました
+    {% elif not ISBN_uBN %}
+        <p class="text-danger">ISBN/uBNが入力されていません</p>
+    {% else %}
+        <h6>【書籍情報】</h6>
+        <br>
+        ISBN/uBN：{{ISBN_uBN}}<br>
+        タイトル：{{book.title}}<br>
+        著者：{{book.author}}<br>
+        
+        <h6>【レビュー検索結果】</h6>
+        <br>
+        <!-- 自分自身のhtmlを再度読み込む -->
+        <!--
+        <form action="/lib_review" method="POST">
+            <label>ISBN・雑誌IDを入力</label>
+            <input name="ISBN_uBN" placeholder="ISBN・雑誌IDを入力"></input>
+            <button type="submit">検索
+            </button>
+            {% if is_done == True %}
+                書込しました
+            {% endif %}
+        </form>
+        -->
+
+        <!-- レビュー表示 -->
+        {% if books_review == [] %}
+        <p>レビューはありません</p>
+        {% else %}
+            {% for book_review in books_review %}
+                {{book_review.id}}&emsp;{{book_review.userID}}&emsp;
+                {{book_review.review_title}}
+                <br>
+                {{book_review.review_detail}}
+                <br>
+                <!-- 削除ボタン これでいいのか？ -->
+                <form action="/lib_review" method="POST">
+                    <input type="hidden" name="del_reviewID" value="{{book_review.id}}">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
+                </form>
+                {% if is_done == True %}
+                    レビュー削除しました
+                {% endif %}
+                <br>
+            {% endfor %}
+        {% endif %}
+
+    {% endif %}
+    
+    <br><br>
+    <a href="/librarian/">戻る</a>
+
+{% endblock %}

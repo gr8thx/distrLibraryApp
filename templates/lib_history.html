@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>過去の貸出履歴</h3>
+
+    {% if not collectionID %}
+        <p class="text-danger">蔵書IDが入力されていません</p>
+    {% else %}
+
+        蔵書ID：{{collectionID}}
+
+        {% if histories == [] %}
+            <p>過去の貸出履歴がありません</p>
+        {% else %}
+            <div class="lending_table">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>蔵書ID</th>
+                        <th>ISBN/uBN</th>
+                        <th>タイトル</th>
+                        <th>著者</th>
+                        <th>版数</th>
+                        <th>貸出実績日</th>
+                        <th>返却実績日</th>
+                    </tr>
+                    </thead>
+                    {% for history in histories %}
+                    <tr>
+                        <td>{{history.collectionID}}</td>
+                        <td>{{history.ISBN_uBN}}</td>
+                        <td>{{history.title}}</td>
+                        <td>{{history.author}}</td>
+                        <td>{{history.revision}}</td>
+                        <td>{{history.checkout_date}}</td>
+                        <td>{{history.return_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+
+    {% endif %}
+
+    <br>
+    <a href="/librarian/">戻る</a>
+
+{% endblock %}

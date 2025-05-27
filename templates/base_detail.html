@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分散型図書館App</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- GoogleFontsのNoto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <!-- Google font Icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_detail.css') }}">
+    
+</head>
+<body>
+    <div class="area">
+
+        <nav>
+            <ul class="gnav-navi">
+            <li>
+                <!-- アイコン -->
+                <span class="material-icons icon-small">menu_book</span>
+                分散型図書館App
+            </li> &emsp;
+            <li>
+                <!-- アイコン -->
+                <span class="material-icons icon-small">home</span>
+                <a href="/">HOME</a>
+            </li> &emsp;
+            <li>
+                <!-- アイコン -->
+                <span class="material-icons icon-small">login</span>
+                <a href="/login">LogIn</a>
+            </li> &emsp;
+            <li>
+                <!-- アイコン -->
+                <span class="material-icons icon-small">logout</span>
+                <a href="/logout">LogOut</a>
+            </li> &emsp;
+            <li>
+                <!-- アイコン -->
+                <span class="material-icons icon-small">account_circle</span>
+                {% if current_user.role == "user" %}
+                    <a href="/user/">{{current_user.id}}</a>
+                {% elif current_user.role == "admin" %}
+                    <a href="/librarian/">{{current_user.id}}</a>
+                {% elif not current_user.is_authenticated %}
+                    NotLoggedIn
+                {% endif %}
+            </li>
+            </ul>
+
+        </nav>
+    
+        <div class="context">
+
+
+
+            {% block content %}
+            {% endblock %}
+
+
+
+        </div>
+
+
+	    <!-- ここに背景の四角が表示されるらしい  -->
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "base_compact.html" %}
+{% block content %}
+
+    <h2>Delete Account</h2>
+    <br>
+    <!-- アイコン -->
+    <span class="material-icons icon-large">person_off</span>
+
+    <br>
+    <!-- アカウント削除フォーム -->
+    <!-- 自分自身のhtmlを再度読み込む -->
+    <form action="/lib_account_delete/" method="POST">
+        userID：
+        <input type="text" name="request_delete_userID"  placeholder="user0000xx"></input>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-outline-danger btn-sm">delete</button>
+        <br>
+        {% if is_deleted %}
+            Success Delete Account
+        {% endif %}
+    </form>
+
+    <br>
+    <a href="/librarian/">back</a>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>利用者TOPページ</h3>
+
+    <!-- 本を借りるフォーム -->
+    <h6>【蔵書貸出】</h6>
+    <form action="/borrow/" method="POST">
+        貸出する蔵書IDを入力：
+        <input name="request_lend_collectionID"></input>
+        <button type="submit" class="btn btn-outline-primary btn-sm">貸出</button>
+    </form>
+    一度、貸出すると事前予約は解除されます。<br>
+
+    <h6>【貸出中の蔵書】</h6>
+    {% if books_lending == [] %}
+        <p>貸出中の蔵書はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>蔵書ID</th>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>借本日</th>
+                    <th>返却予定日</th>
+                    <th>レビュー</th>
+                    <th>返却</th>
+                </tr>
+                </thead>
+            {% for book_lending in books_lending %}
+                <tr>
+                    <td>{{book_lending.collectionID}}</td>
+                    <td>{{book_lending.ISBN_uBN}}</td>
+                    <td>{{book_lending.title}}</td>
+                    <td>{{book_lending.author}}</td>
+                    <td>{{book_lending.checkout_date}}</td>
+                    <td>{{book_lending.return_schedule_date}}</td>
+                    <td><a href="/review_write/{{book_lending.ISBN_uBN}}">レビュー書込</a></td>
+                    <td><a href="/return_book/{{book_lending.collectionID}}"><button class="btn btn-outline-danger btn-sm">返却</button></a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+
+    <h6>【直近予約中の蔵書】</h6>
+    {% if book_nearest_reservations == [] %}
+        <p>直近予約中の蔵書はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>蔵書ID</th>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                </tr>
+            </thead>
+            {% for book_nearest_reservation in book_nearest_reservations %}
+                <tr>
+                    <td>{{book_nearest_reservation.collectionID}}</td>
+                    <td>{{book_nearest_reservation.ISBN_uBN}}</td>
+                    <td>{{book_nearest_reservation.title}}</td>
+                    <td>{{book_nearest_reservation.author}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    <h6>【事前予約中の蔵書】</h6>
+    <br>
+    {% if books_schedule == [] %}
+        <p>事前予約中の蔵書はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>蔵書ID</th>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>貸出予約日</th>
+                    <th>返却予定日</th>
+                    <th>貸出</th>
+                    <th>破棄</th>
+                </tr>
+            </thead>
+            {% for book_schedule in books_schedule %}
+                <tr>
+                    <td>{{book_schedule.collectionID}}</td>
+                    <td>{{book_schedule.ISBN_uBN}}</td>
+                    <td>{{book_schedule.title}}</td>
+                    <td>{{book_schedule.author}}</td>
+                    <td>{{book_schedule.checkout_date}}</td>
+                    <td>{{book_schedule.return_date}}</td>
+                    <td>
+                        <form action="/borrow/" method="POST">
+                        <input type="hidden" name="request_lend_collectionID" value={{book_schedule.collectionID}} ></input>
+                        <button type="submit" class="btn btn-outline-primary btn-sm">貸出</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/cancel/" method="POST">
+                        <input type="hidden" name="request_cancel_collectionID" value={{book_schedule.collectionID}} ></input>
+                        <button type="submit" class="btn btn-outline-danger btn-sm">破棄</button>
+                        </form>
+                    </td>
+                
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+       <p>一度、貸出すると事前予約は解除されます。</p>
+    {% endif %}
+
+    <h6>【返却遅延回数】</h6>
+    <br>
+    合計{{overdue_time}}回。（5回で貸出不可になります）
+    <br>
+    
+    <h6>【その他】</h6>
+    <br>
+    <a href="/history/">貸出履歴</a>
+    <br>
+    <a href="/change_password/">パスワード変更</a>
+    <br>
+    <form action="/reservation/" method="POST">
+        事前予約・直近予約：
+        <input name="request_reservation_collectionID" placeholder="蔵書IDを入力してください"></input>
+        <button type="submit" class="btn btn-outline-dark btn-sm">確認</button>
+    </form>
+
+{% endblock %}

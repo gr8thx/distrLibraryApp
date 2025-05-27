@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>老朽図書の廃棄処理</h3>
+
+    蔵書ID:{{collectionID}}
+    <br>
+
+    {% if is_done == 1 %}
+        廃棄完了しました。
+    {% elif is_done == 2 %}
+        書棚・分類IDが入力されていません。
+    {% else %}
+        廃棄失敗しました？
+    {% endif %}
+    
+    <br>
+    <a href="/lib_new_book">戻る</a>
+     
+{% endblock %}

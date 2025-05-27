@@ -1,0 +1,21 @@
+{% extends "base_compact.html" %}
+{% block content %}
+
+    <h3>老朽図書の廃棄</h3>
+    <br>
+    <!-- アイコン -->
+    <!--
+    <span class="material-icons icon-large">dictionary</span>
+    -->
+    <span class="material-icons icon-large">scan_delete</span>
+
+    <br><br>
+    <form action="/lib_dispose_result/" method="POST">
+        ISBN/uBN
+        <input name="request_collectionID" required></input>
+
+        <button type="submit" class="btn btn-outline-danger btn-sm">廃棄</button>
+    </form>
+    
+
+{% endblock %}

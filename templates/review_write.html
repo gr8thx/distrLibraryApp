@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>レビュー(クチコミ)の書込</h3>
+
+    <h6>【書籍情報】</h6>
+    <br>
+    ISBN/uBN：{{ISBN_uBN}}<br>
+    タイトル：{{book.title}}<br>
+    著者：{{book.author}}<br>
+    
+    <h6>【レビュー書込】</h6>
+    <!-- 自分自身のhtmlを再度読み込む -->
+    <form action="/review_write/{{ISBN_uBN}}" method="POST">
+        <table>
+            <label>ユーザーID：{{current_user.id}}</label>
+            <tr>
+                <td><label>レビューのタイトル：</label></td>
+                <td><input name="review_title" placeholder="レビュータイトル"></input></td>
+            </tr>
+            <tr>
+                <td><label>レビューの内容：</label></td>
+                <td><textarea name="review_detail" rows="4" cols="40" placeholder="レビュー内容"></textarea></td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-outline-primary btn-sm">レビュー書込
+        </button>
+        {% if is_2ndtime==True and is_done == False %}
+            <p class="text-danger">入力欄に記入されていません</p>
+        {% elif is_done == True %}
+            書込しました
+        {% endif %}
+    </form>
+    
+    <br>
+    <a href="/user/">戻る</a>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <h3>蔵書貸出</h3>
+
+     <!--
+    貸出上限を超えると貸出冊数超過を表示。
+    それ以外は貸し出ししました。を表示
+    -->
+    <h6>【貸出処理結果】</h6>
+    {% if over_flag==1 %}
+        <p>貸出冊数が超過しています。</p>
+    {% elif over_flag==2 %}
+        <p>貸出処理をスキップしました。</p>
+    {% elif over_flag==3 %}
+        <p>貸出中または貸出不可です。</p>
+    {% elif over_flag==4 %}
+        <p>直近予約されています。</p>
+    {% elif over_flag==8 %}
+        <p>明日に他利用者の予定があるため貸出できません。</p>
+    {% elif over_flag==9 %}
+        <p>蔵書ID入力が間違っています。</p>
+    {% else %}
+        <p>貸出処理しました。</p>
+    {% endif %}
+
+
+    <h6>【貸出中一覧】</h6>
+
+    {% if books_lending == [] %}
+        <p>貸出中の蔵書はありません</p>
+    {% else %}
+        <div class="lending_table">
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>蔵書ID</th>
+                    <th>ISBN/uBN</th>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>借本日</th>
+                    <th>返却予定日</th>
+                    <th>レビュー</th>
+                    <th>返却</th>
+                </tr>
+            </thead>
+            {% for book_lending in books_lending %}
+                <tr>
+                    <td>{{book_lending.collectionID}}</td>
+                    <td>{{book_lending.ISBN_uBN}}</td>
+                    <td>{{book_lending.title}}</td>
+                    <td>{{book_lending.author}}</td>
+                    <td>{{book_lending.checkout_date}}</td>
+                    <td>{{book_lending.return_schedule_date}}</td>
+                    <td><a href="/review_write/{{book_lending.ISBN_uBN}}">レビュー書込</a></td>
+                    <td><a href="/return_book/{{book_lending.collectionID}}"><button class="btn btn-outline-danger btn-sm">返却</button></a></td>
+                {% endfor %}
+            {% endif %}
+            </table>
+        </div>
+        <a href="/user/">戻る</a>
+
+{% endblock %}

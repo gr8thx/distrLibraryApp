@@ -1,0 +1,237 @@
+/*
+ソースコードの改造元はこちら．
+Copyright (c) Mohammad Abdul Mohaiman
+https://codepen.io/mohaiman/pen/MQqMyo
+Released under the MIT license
+http://opensource.org/licenses/mit-license.php
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: auto; /* 変更 */
+    /* GoogleFontsのNoto Sans JP 下の4行分 */
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.material-icons{
+    font-size: 24px; /* ■追加 */
+}
+.material-icons.icon-large{
+    font-size: 36px; /* ■追加 */
+}
+
+ul.gnav-navi{
+	background: #fff;
+	padding: 0;
+	text-align: center;
+}
+ul.gnav-navi li{
+	/* display: inline-block; ■削除 */
+    display: inline-flex; /* ■追加 */
+    vertical-align:middle; /* ■追加 */
+}
+
+.calendar-container{
+    display: flex;
+    gap: 40px; /* カレンダー同士の間隔 */
+    justify-content: center; /* 中央揃え */
+}
+.calendar {
+    flex: 1; /* すべてのカレンダーが均等な幅 */
+}
+.calendar th {
+    padding: 5px; /* 余白を増やす */
+    text-align: center; /* 中央揃え */
+    font-size: 12px; /* 読みやすさを確保 */
+    background: #fff;
+}
+.calendar td {
+    padding: 5px; /* 余白を増やす */
+    text-align: center; /* 中央揃え */
+    font-size: 12px; /* 読みやすさを確保 */
+    background: #fff;
+}
+
+.lending_table th{ /* 貸出中の蔵書の表■■■■■■ */
+    padding: 3px;
+    text-align: center;
+    background: #fff;
+}
+.lending_table td{ /* 貸出中の蔵書の表■■■■■■ */
+    padding: 3px;
+    text-align: center;
+    background: #fff;
+}
+
+
+.context {
+    width: 80%; /* ■変更 */
+    margin:0 auto; /* ■追加 */
+    /*left: 50%;*/ /* ■追加 */
+    padding: 1.5%;
+    border-radius: 20px; /* ■追加 */
+    position: relative; /* 変更 */
+    top: 2vh; /* ■変更 */
+    /*transform: translate(-50%, 0%);*/ /* ■変更 */
+    /*text-align: center;*/ /* 追加 */
+    z-index: 10;  /* ←前面に表示 */
+    background: #fff8; /* ■追加 */
+    margin-bottom: 10px; /* 追加 */
+    overflow: auto; /* スクロール可能にする */
+    max-height: 90vh; /* 必要に応じて高さを制限 */
+}
+/*
+.context h1 {
+     text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+*/
+
+.context h3:after { /* h3 見出しの飾り付け*/
+    content: "";
+    display: block;
+    height: 4px;
+    background: linear-gradient(to right, #99f, transparent);
+}
+h6 {
+    margin-top: 15px; /* 上の余白 */
+    margin-bottom: 5px; /* 下の余白 */
+        
+    position: relative;
+    display: inline-block;
+}
+h6::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* 下線の位置 */
+    width: 100%;
+    height: 2px; /* 下線の太さ */
+    background: linear-gradient(to right, #66f, #f66); /* 左赤→右青のグラデーション */
+}
+
+
+.area {
+    /* background: #eee; */
+    background: linear-gradient(to left, #bbb, #eee);
+    width: 100%;
+    /*height: 100vh;*/
+    min-height: 100vh; /* 追加 ここで調整できない■■■ */
+}
+
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* 追加 */
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
