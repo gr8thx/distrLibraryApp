@@ -6,6 +6,8 @@ Python Flaskの勉強のために作成したWebアプリです。
 
 ![](documents/システム構成図.drawio.png)
 
+![](screenshot1.png)
+![](screenshot2.png)
 ![](documents/ER図.drawio.png)
 
 ![](documents/画面遷移図.drawio.png)
