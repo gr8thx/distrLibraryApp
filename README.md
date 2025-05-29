@@ -1,4 +1,4 @@
-## 分散型図書館App [distLibraryApp]
+## 分散型図書館App [distrLibraryApp]
 
 Python Flaskの勉強のために作成したWebアプリです。
 
