@@ -7,3 +7,4 @@ Python Flaskの勉強のために作成したWebアプリです。
 >バックエンド: Python Flask
 
 >その他: SQLite GoogleBooksAPI
+https://github.com/gr8thx/distrLibraryApp/documents/システム構成図.drawio.png
