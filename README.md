@@ -2,9 +2,4 @@
 
 Python Flaskの勉強のために作成したWebアプリです。
 
->フロントエンド: html css bootstrap
-
->バックエンド: Python Flask
-
->その他: SQLite GoogleBooksAPI
 ![](documents/システム構成図.drawio.png)
